@@ -1,5 +1,5 @@
-<?php 
-    include_once('includes/connect.php');
+<!-- <?php 
+    /*include_once('includes/connect.php');
     include_once('includes/session.php');  
     include('includes/product.php');
     include('formatMoney.php');
@@ -10,9 +10,9 @@
 
     $ordered_items = Orderdetails::where(array('customer_id' =>$session->user_id));
     foreach ($ordered_items as $key => $item) {
-     $product = Product::find($item->product_id);
-    }
-?>
+     $product = Product::find($item->product_id);*/
+    
+?> -->
 
 <!-- ======================================================================================================================== -->	
 <div id="mainBody" class="container">
@@ -22,7 +22,7 @@
             <center>
 	
     <?php
-$ordered_items = Orderdetails::where(array('customer_id' =>$session->user_id));
+/*$ordered_items = Orderdetails::where(array('customer_id' =>$session->user_id));
 	
 						$session->user_id = mysql_query("select MAX(notifID) as max_notifID from notif");										
 						$row = mysql_fetch_array($session->user_id);
@@ -78,13 +78,13 @@ mysql_query("INSERT INTO notif (notifID, orderID,date_ordered)
 mysql_query("update order_details set OrderID='$orders' where CustomerID='$ses_id' and OrderID=''")or die(mysql_error());
 mysql_query ("UPDATE order_details SET Total_qty =$Quantity - $qty WHERE ProductID ='$pid' and Total_qty='' ");
 }
-}
+}*/
 ?>
             
         
         
         <?php
-                        
+/*                        
 $total1=$_POST['totas'];
 $tax=$total1 * 0.12;
 $transaction_code= "Heldy".$orders.$ses_id;
@@ -97,11 +97,11 @@ $shipaddress=$_POST['shipaddress'];
 $city=$_POST['city'];
 $ADDRESS=$shipaddress .' '. $city;               
 mysql_query("update orders set shipping_address='$ADDRESS' where CustomerID='$ses_id' and Transaction_code='$transaction_code'");   					  
-  
+  */
 ?>
 
 
-<form action="https://www.sandbox.paypal.com/cgi-bin/webscr"  method="post">
+<!--<form action="https://www.sandbox.paypal.com/cgi-bin/webscr"  method="post">
 <input type="hidden" name="cmd" value="_xclick" />
         <input type="hidden" name="business" value="sabellorichmon-facilitator@yahoo.com" />
         <input type="hidden" name="item_name" value="<?php echo $row4['Transaction_code']; ?>" />
@@ -121,9 +121,9 @@ mysql_query("update orders set shipping_address='$ADDRESS' where CustomerID='$se
         
       
 		</div>
-        <!-- Payment confirmed -->
+         Payment confirmed 
         <input type="hidden" name="return" value="" />
-        <!-- Payment cancelled -->
+        <!-- Payment cancelled -
         <input type="hidden" name="cancel_return" value="" />
         <input type="hidden" name="rm" value="2" />
         <input type="hidden" name="notify_url" value="" />
@@ -147,8 +147,8 @@ mysql_query("update orders set shipping_address='$ADDRESS' where CustomerID='$se
     
 ?>
 
-<!-- Footer ------------------------------------------------------ -->
+<!-- Footer ------------------------------------------------------ 
 <hr class="soft">
 <div  id="footerSection" class="thumbnail">
 	<?php include('footer2.php');?>
-</div></div></body>
+</div></div></body>==>

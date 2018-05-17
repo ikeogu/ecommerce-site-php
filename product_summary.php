@@ -24,7 +24,83 @@ if (isset($_GET['product_id']) && isset($_GET['opt'])){
   }
    $ordered_items = Orderdetails::where(array('customer_id' =>$session->user_id));
 ?>
+<script src="https://www.paypalobjects.com/api/checkout.js"></script>
+<script type="text/javascript" src="https://api.ravepay.co/flwv3-pug/getpaidx/api/flwpbf-inline.js"></script>
+
+<script src="https://www.paypalobjects.com/api/checkout.js"></script>
+<script>
+    paypal.Button.render({
+
+        env: 'sandbox', // sandbox | production
+
+        client: {
+            sandbox:    'AZDxjDScFpQtjWTOUtWKbyN_bDt4OgqaF4eYXlewfBP4-8aqX3PiV8e1GWU6liB2CUXlkA59kJXE7M6R',
+            production: '<insert production client id>'
+        },
+
+        payment: function(data, actions) {
+            return actions.payment.create({
+                payment: {
+                    transactions: [
+                        {
+                            amount: { total: '0.01', currency: 'USD' }
+                        }
+                    ]
+                }
+            });
+        },
+
+        // Wait for the payment to be authorized by the customer
+
+        onAuthorize: function(data, actions) {
+
+            // Get the payment details
+
+            return actions.payment.get().then(function(data) {
+
+                // Display the payment details and a confirmation button
+
+                var shipping = data.payer.payer_info.shipping_address;
+
+                document.querySelector('#recipient').innerText = shipping.recipient_name;
+                document.querySelector('#line1').innerText     = shipping.line1;
+                document.querySelector('#city').innerText      = shipping.city;
+                document.querySelector('#state').innerText     = shipping.state;
+                document.querySelector('#zip').innerText       = shipping.postal_code;
+                document.querySelector('#country').innerText   = shipping.country_code;
+
+                document.querySelector('#paypal-button-container').style.display = 'none';
+                document.querySelector('#confirm').style.display = 'block';
+
+                // Listen for click on confirm button
+
+                document.querySelector('#confirmButton').addEventListener('click', function() {
+
+                    // Disable the button and show a loading message
+
+                    document.querySelector('#confirm').innerText = 'Loading...';
+                    document.querySelector('#confirm').disabled = true;
+
+                    // Execute the payment
+
+                    return actions.payment.execute().then(function() {
+
+                        // Show a thank-you note
+
+                        document.querySelector('#thanksname').innerText = shipping.recipient_name;
+
+                        document.querySelector('#confirm').style.display = 'none';
+                        document.querySelector('#thanks').style.display = 'block';
+                    });
+                });
+            });
+        }
+
+    }, '#paypal-button-container');
+
+</script>
 <script type='text/javascript'>
+
   function numbers(){
 
     //var CheckPassword = /^[A-Za-z]\w{7,14}$/; - numbers and characters and uppercase
@@ -82,16 +158,7 @@ if (isset($_GET['product_id']) && isset($_GET['opt'])){
             $strings =  $product->descr;
             $string = strip_tags($strings);
 
-            /*if (isset($_GET['id']) && isset($_GET['opt'])){
-            $product = Product::find($_GET['id']);
-            if($_GET['opt']==0 && $product)
-             $product->delete();
-            redirect ('product_summary.php');
-            }*/
-
-
-
-            if (strlen($string) > 20) {
+           if (strlen($string) > 20) {
               $stringCut = substr($string, 0, 10);
               $string = substr($stringCut, 0, strrpos($stringCut, ' '))."... <a href='user_product_details.php?id=$item->product_id'><span style='color:blue'>Read More</span></a>";
             } 
@@ -126,8 +193,20 @@ if (isset($_GET['product_id']) && isset($_GET['opt'])){
           <div class=" col-lg-6 col-md-6">
             <a href="user_products.php"  type= "button" class="btn btn-large btn-fill btn-success"> Continue Shopping<i class="icon-arrow-left"></i>  </a>
           </div>
-          <div class="col-lg-6 col-md-6">
-            <button type="submit" id="" onclick="return confirm('Are you sure you want to Checkout?')" name="submit" class="btn btn-large pull-right btn-info btn-fill">Check Out <i class="icon-arrow-right"></i></button>
+          <div id="paypal-button-container"></div>
+
+          <div id="confirm" class="hidden">
+              <div>Ship to:</div>
+              <div><span id="recipient"></span>, <span id="line1"></span>, <span id="city"></span></div>
+              <div><span id="state"></span>, <span id="zip"></span>, <span id="country"></span></div>
+
+              <button id="confirmButton">Complete Payment</button>
+          </div>
+
+          <div id="thanks" class="hidden">
+              Thanks, <span id="thanksname"></span>!
+          </div>
+<script type="text/javascript" src="https://api.ravepay.co/flwv3-pug/getpaidx/api/flwpbf-inline.js"></script>
           </div>  
         </div>   
         <?php

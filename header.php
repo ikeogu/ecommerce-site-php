@@ -49,7 +49,7 @@
 						</div>
 						<div class="col-sm-8">
 							<h3 class="add bb-year-end-ribbon hidden-xs"><img src="images/re.png" width="40px;" alt="" /> 
-							<span> We Can <span>Help</span> Your Research</span> <button class="btn btn-default"></button></h3>
+							<span> We Can <span>Help</span> Your Research Work</span> <button class="btn btn-default"></button></h3>
 						</div>
 					</div>
 				</div>
@@ -87,6 +87,10 @@
 										
 										<li><a href="about-us.html">About Us</a> <span class="label label-info text-center hidden-xs">New <i class="fa fa-caret-right"></i></span></li>
 										<li><a href="contact-us.html">Contact Us</a></li>
+									</ul>
+									<ul class="nav navbar-nav">
+										<li><a href="login.php"> Login </a></li>
+										<li><a href="signup.php">Sign up </a></li>
 									</ul>
 									<form class="navbar-form navbar-right" role="search">
 										<div class="form-group">
