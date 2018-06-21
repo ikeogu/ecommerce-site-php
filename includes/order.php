@@ -13,7 +13,7 @@
 		public $status;
 		public $download_status; 
 
-		protected static $table_name = 'order';
+		protected static $table_name = 'oder';
 		protected static $primary_key = 'order_id';
 		protected  static $class_name = 'order';
 		protected  static $table_fields = array('order_id','customer_id','date_out','total','download_status','status');

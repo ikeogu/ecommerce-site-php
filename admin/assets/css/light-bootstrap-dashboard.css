@@ -108,8 +108,8 @@ h6, .h6 {
 }
 
 p {
-    font-size: 16px;
-    line-height: 1.5;
+    font-size: 10px;
+    line-height: 0.9;
 }
 
 h1 small, h2 small, h3 small, h4 small, h5 small, h6 small, .h1 small, .h2 small, .h3 small, .h4 small, .h5 small, .h6 small, h1 .small, h2 .small, h3 .small, h4 .small, h5 .small, h6 .small, .h1 .small, .h2 .small, .h3 .small, .h4 .small, .h5 .small, .h6 .small {
@@ -331,7 +331,7 @@ input:focus {
 }
 
 .sidebar .nav li.active > a {
-    color: #FFFFFF;
+    color: 000;
     opacity: 1;
     background: rgba(255, 255, 255, 0.23);
 }

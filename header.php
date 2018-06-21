@@ -85,8 +85,8 @@
 											</ul>	
 										</li>
 										
-										<li><a href="about-us.html">About Us</a> <span class="label label-info text-center hidden-xs">New <i class="fa fa-caret-right"></i></span></li>
-										<li><a href="contact-us.html">Contact Us</a></li>
+										<li><a href="aboutus.php">About Us</a> <span class="label label-info text-center hidden-xs">New <i class="fa fa-caret-right"></i></span></li>
+										<li><a href="contact.php">Contact Us</a></li>
 									</ul>
 									<ul class="nav navbar-nav">
 										<li><a href="login.php"> Login </a></li>

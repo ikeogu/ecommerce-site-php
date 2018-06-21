@@ -10,4 +10,4 @@
         include_once 'includes/product.php';
         $show= Product::show();
         echo $show;
-        ?>
+?>

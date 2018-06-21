@@ -39,14 +39,18 @@
 			$this->logged_in = false;
 			session_destroy();
 		}
+		//for the product to be kept in session so that i can fetch it from the server
+		public function setProductId($id){
+			 $_SESSION['product_id'] =$this->product_id  = $id;
+		}
+
+		public function getProductId(){
+			if(isset($_SESSION['product_id']))
+				 $_SESSION['product_id'] = $this->product_id;
+		}
 	}
 
 	$session = new Session();
 	ob_start();
-// if (!isset($_SESSION['id'])){
-// header('location:index.php');
-// }
-
-// $ses_id = $_SESSION['id'];
 
 ?>

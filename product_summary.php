@@ -1,11 +1,10 @@
 <?php 
-include('includes/connect.php');
 include('includes/session.php');
 include('includes/product.php');
-include('formatMoney.php');
 include ('includes/function.php');
 include ('includes/orderdetails.php');
-include ('user_header.php');
+    require 'vendor/autoload.php';
+
  //if(isset($_GET) & !empty($_GET))
   //$product = Product::find($product_id);
  if(isset($_POST) & !empty($_POST)){
@@ -14,7 +13,6 @@ include ('user_header.php');
    $order->computeOrderDetails($product->price);
    $order->customer_id = $session->user_id;
    $order->save();
-  
    }
 if (isset($_GET['product_id']) && isset($_GET['opt'])){
     $product = Product::find($_GET['product_id']);
@@ -22,116 +20,111 @@ if (isset($_GET['product_id']) && isset($_GET['opt'])){
       $product->delete();
     redirect ('product_summary.php');
   }
-   $ordered_items = Orderdetails::where(array('customer_id' =>$session->user_id));
-?>
-<script src="https://www.paypalobjects.com/api/checkout.js"></script>
-<script type="text/javascript" src="https://api.ravepay.co/flwv3-pug/getpaidx/api/flwpbf-inline.js"></script>
+   $ordered_items = Orderdetails::where(array('customer_id' =>$session->user_id ));
+   
 
-<script src="https://www.paypalobjects.com/api/checkout.js"></script>
-<script>
-    paypal.Button.render({
+   ?>
 
-        env: 'sandbox', // sandbox | production
 
-        client: {
-            sandbox:    'AZDxjDScFpQtjWTOUtWKbyN_bDt4OgqaF4eYXlewfBP4-8aqX3PiV8e1GWU6liB2CUXlkA59kJXE7M6R',
-            production: '<insert production client id>'
-        },
 
-        payment: function(data, actions) {
-            return actions.payment.create({
-                payment: {
-                    transactions: [
-                        {
-                            amount: { total: '0.01', currency: 'USD' }
-                        }
-                    ]
-                }
-            });
-        },
 
-        // Wait for the payment to be authorized by the customer
-
-        onAuthorize: function(data, actions) {
-
-            // Get the payment details
-
-            return actions.payment.get().then(function(data) {
-
-                // Display the payment details and a confirmation button
-
-                var shipping = data.payer.payer_info.shipping_address;
-
-                document.querySelector('#recipient').innerText = shipping.recipient_name;
-                document.querySelector('#line1').innerText     = shipping.line1;
-                document.querySelector('#city').innerText      = shipping.city;
-                document.querySelector('#state').innerText     = shipping.state;
-                document.querySelector('#zip').innerText       = shipping.postal_code;
-                document.querySelector('#country').innerText   = shipping.country_code;
-
-                document.querySelector('#paypal-button-container').style.display = 'none';
-                document.querySelector('#confirm').style.display = 'block';
-
-                // Listen for click on confirm button
-
-                document.querySelector('#confirmButton').addEventListener('click', function() {
-
-                    // Disable the button and show a loading message
-
-                    document.querySelector('#confirm').innerText = 'Loading...';
-                    document.querySelector('#confirm').disabled = true;
-
-                    // Execute the payment
-
-                    return actions.payment.execute().then(function() {
-
-                        // Show a thank-you note
-
-                        document.querySelector('#thanksname').innerText = shipping.recipient_name;
-
-                        document.querySelector('#confirm').style.display = 'none';
-                        document.querySelector('#thanks').style.display = 'block';
-                    });
-                });
-            });
-        }
-
-    }, '#paypal-button-container');
-
-</script>
-<script type='text/javascript'>
-
-  function numbers(){
-
-    //var CheckPassword = /^[A-Za-z]\w{7,14}$/; - numbers and characters and uppercase
-    var letterexp = /^[a-zA-Z]+$/;
-    var quanti = 32; 
-    if(document.getElementById('quantity').value.match(letterexp)){
-      alert('Please input numbers only');
-      document.getElementById('quantity').value='';
-    }
-    
-  }
-</script>
-
-<script>
-  function confirmDelete(delUrl) {
-    if (confirm("Are you sure you want to update product status?")) {
-     document.location = 'update_stat.php';
-    }
-  }
-</script>
 <!-- ======================================================================================================================== -->	
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    <title>products</title>
+        <!-- ALL STYLESHEET -->
+        <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/font-awesome.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <link href="css/style2.css" rel="stylesheet">
+    
+    </head>   
+  <body>
+    
+    <!-- header -->
+    <header class="header">
+      
+        
+      <!-- logo and adds -->
+      <div class="logo-add">
+        <div class="container">
+          <div class="row">
+            <div class="col-sm-4">
+              <div class="logo"><i class="fa fa-diamond"></i>Heldy - products</div>
+            </div>
+            <div>
+                <?php 
+
+                  $count = count(Orderdetails::where(array('customer_id' => $session->user_id )));
+    
+                echo "<div class='pull-right'> <br/>
+                  <a title='Click to view your cart!' href='product_summary.php'> <span class='btn btn-mini btn-success'> <i class='icon-shopping-cart icon-white'></i> <small>your cart has $count items</small> </span> </a>
+                  <a title='Click to view your cart!' href='product_summary.php'>
+                    <span class='btn btn-mini active btn'>check cart</span></a>
+                </div>";
+                ?>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+
+      <!-- header bottom -->
+      <div class="header-bottom">
+        <div class="row">
+          <div class="col-sm-12">
+            <nav class="navbar navbar-default">
+              <div class="container">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#header-bottom" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                  </button>
+                </div>
+
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="header-bottom">
+                  <ul class="nav navbar-nav">
+                    <li><a href="index.php" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Home</a></span>
+                      
+                    </li>
+                    <li class=""><a href="user_products.php"><i class="icon-flag"></i>products</a></li>
+                    <li class=""><a href="product_summary.php"><i class="icon-flag"></i> Chart</a></li>
+                    <li class=""><a href="logout.php"><i class="icon-flag"></i> Logout</a></li>
+                  <li><a href="contact.php">Contact Us</a></li>
+                  </ul>
+                  <form class="navbar-form navbar-right" role="search">
+                    <div class="form-group">
+                      <input type="text" class="form-control" placeholder="Search...">
+                      <span class="nav-search"><a href="#"><i class="fa fa-search"></i></a></span>
+                    </div>  
+                  </form>
+                </div>
+              </div>
+            </nav>
+          </div>  
+        </div>    
+      </div>  
+
+    </header>
+    
+
 
 
 
 <div id="mainBody" class="container">
     <font color="black">
 
-    <form method="post" action="payment_details.php">
+    <form method="post" action="product_summary.php">
       <h3>  SHOPPING CART [ <small><?php
         $count = count(Orderdetails::where(array('customer_id' => $session->user_id )));
+        //var_dump($count); exit();
         echo $count;?> </small>]
+
      </h3>  
       <hr class="soft"/>
       
@@ -150,23 +143,27 @@ if (isset($_GET['product_id']) && isset($_GET['opt'])){
           <?php 
             $row= '';
              $total = 0;
+             if($ordered_items){
             foreach ($ordered_items as $key => $item) {
               # code...
-             $total += $item->Total ;
+              $item->Total/=100;
+             $total += $item->Total;
+             //$total/=100;
             
             $product = Product::find($item->product_id);
+            $product->price/= 100;
             $strings =  $product->descr;
             $string = strip_tags($strings);
 
            if (strlen($string) > 20) {
               $stringCut = substr($string, 0, 10);
-              $string = substr($stringCut, 0, strrpos($stringCut, ' '))."... <a href='user_product_details.php?id=$item->product_id'><span style='color:blue'>Read More</span></a>";
+              $string = substr($stringCut, 0, strrpos($stringCut, ''))."... <a href='user_product_details.php?id=$item->product_id'><span style='color:blue'>Read More</span></a>";
             } 
             $row.= " <tr>
                           <td><img width='60' src='images/product/$product->logo'> </td>
                           <td>$product->title  <br/>   $string</td>
                           <td>$item->quantity</td>
-                          <td>$product->price</td>
+                          <td>$product->price </td>
                           <td>$item->Total</td>
                           <td><a href='product_summary.php?id={$item->product_id}&opt=0'>
                             <button class='btn btn-info' onclick='return confirm('Are you sure you want to delete?')' type= 'button'>
@@ -175,45 +172,36 @@ if (isset($_GET['product_id']) && isset($_GET['opt'])){
                       </tr>    
             "; 
             }
-            echo $row."<td colspan='5' align='right'><h4> TOTAL = $total</h4></td>";                
+            echo $row."<td colspan='5' align='right'><h4> TOTAL = $total</h4></td>";  
+            }
+                          
           ?> 
         </tbody>
-      </table>           
-          <?php
-            if($count==0 ){
-            ?>
-            <script type="text/javascript">
-              alert("Your shopping cart is empty. Add an item");
-              window.location= "user_products.php";
-            </script>
-           <?php
-              }else{
-          ?>   
-        <div class="row">
-          <div class=" col-lg-6 col-md-6">
-            <a href="user_products.php"  type= "button" class="btn btn-large btn-fill btn-success"> Continue Shopping<i class="icon-arrow-left"></i>  </a>
-          </div>
-          <div id="paypal-button-container"></div>
-
-          <div id="confirm" class="hidden">
-              <div>Ship to:</div>
-              <div><span id="recipient"></span>, <span id="line1"></span>, <span id="city"></span></div>
-              <div><span id="state"></span>, <span id="zip"></span>, <span id="country"></span></div>
-
-              <button id="confirmButton">Complete Payment</button>
-          </div>
-
-          <div id="thanks" class="hidden">
-              Thanks, <span id="thanksname"></span>!
-          </div>
-<script type="text/javascript" src="https://api.ravepay.co/flwv3-pug/getpaidx/api/flwpbf-inline.js"></script>
+      </table> 
+      <div class="row"> 
+        <div class="container">
+          <div class="col col-lg-2">        
+           
+          <div class='row'>
+                    <div class='col-lg-4 col-md-6'>
+                      <a href='user_products.php'  type= 'button' class='btn btn-large btn-fill btn-success'> Continue Shopping<i class='icon-arrow-left'></i> </a>
+                    </div>
+                  </div> 
+                
+                
+            </div>
+            <div class="col col-md-8">
+              <section class="thumbnail">
+                <h4>Please make a choice!</h4>
+              </section>
+              
+            </div>
+              <div class="col col-lg-2">
+              <a href="makepayment.php" type="button" class="btn btn-info btn-fill"> checkout</a>
+            </div>
           </div>  
-        </div>   
-        <?php
-          }
-        ?>
+        </div>
        
-  </form>
 </font>
 </div>
 <hr class="soft">

@@ -35,7 +35,7 @@ include ("header.php");
             }
         });
         if (validator.form()) {
-            alert('Sucess');
+            alert('Success');
         }
     }
  

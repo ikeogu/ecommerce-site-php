@@ -1,8 +1,8 @@
 <?php
- include('includes/connect.php');
  include('includes/session.php'); 
  include_once 'includes/product.php';
  include ('user_header.php');
+ if(!($session->is_logged_in())) redirect('login.php');
  $products = Product::panel();
  echo $products;
 ?>

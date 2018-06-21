@@ -45,7 +45,7 @@ include("header2.php");
                                 <h4 class="title">Edit product</h4>
                             </div>
                             <div class="content">
-                                <form action="editproduct.php" method="POST" enctype="multipart/form-data">
+                                <form action="editproduct.php?id=<?php echo $product->getProductId()?>"  method="POST" enctype="multipart/form-data">
                                     <div>
                                         <?php echo $result;?>
                                     </div>

@@ -1,37 +1,26 @@
 <footer class="footer">
-            <div class="container-fluid">
-                <nav class="pull-left">
-                    <ul>
-                        <li>
-                            <a href="#">
-                                Home
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                Company
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                Portfolio
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                               Blog
-                            </a>
-                        </li>
-                    </ul>
-                </nav>
-                <p class="copyright pull-right">HELDY pRODUCTS..
+  <div class="container-fluid">
+    <nav class="pull-left">
+      <ul>
+        <li>
+          <a href="index.php">
+             Home
+          </a>
+        </li>
+        <li>
+          <a href="#">
+            Company
+          </a>
+        </li>
+                        
+        </li>
+      </ul>
+      <p class="copyright pull-right">HELDY pRODUCTS..
                     &copy; <script>document.write(new Date().getFullYear())</script> 
                 </p>
-            </div>
-        </footer>
-
-    </div>
-</div>
+    </nav>         
+  </div>
+</footer>
 
 
 </body>
@@ -45,7 +34,7 @@
 
     <!--  Notifications Plugin    -->
     <script src="assets/js/bootstrap-notify.js"></script>
-     <script src="assets/js/notify.js">
+<script src="assets/js/notify.js">
          
          //add a new style 'foo'
 $.notify.addStyle('foo', {
@@ -74,30 +63,4 @@ $(document).on('click', '.notifyjs-foo-base .yes', function() {
 });
      </script>
 
-    <!--  Google Maps Plugin    -->
-    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
-
-    <!-- Light Bootstrap Table Core javascript and methods for Demo purpose -->
-	<script src="assets/js/light-bootstrap-dashboard.js?v=1.4.0"></script>
-
-	<!-- Light Bootstrap Table DEMO methods, don't include it in your project! -->
-	<script src="assets/js/demo.js"></script>
-
-	<script type="text/javascript">
-    	$(document).ready(function(){
-
-        	demo.initChartist();
-
-        	$.notify({
-            	icon: 'pe-7s-gift',
-            	message: "ADMIN YOUR ARE WELCOME!"
-
-            },{
-                type: 'info',
-                timer: 4000
-            });
-
-    	});
-	</script>
-
-</php>
+   

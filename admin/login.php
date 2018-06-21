@@ -55,7 +55,7 @@
                         </div>
                         <div class="col-sm-8">
                             <h3 class="add bb-year-end-ribbon hidden-xs"><img src="img/re.jpg" width="40px;" alt="" /> 
-                            <span>Please  <span>Login up</span> </span> <button class="btn btn-default"> Get Stared </button></h3>
+                            <span>Please  <span>Login</span> </span> </h3>
                         </div>
                     </div>
                 </div>
@@ -76,58 +76,71 @@
                                         <span class="icon-bar"></span>
                                     </button>
                                 </div>
-
-            </div>  
-                <div class="logo-add">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-sm-4">
-                            <div class="logo"><i class="fa fa-diamond"></i>ADMIN  LOgin</div>
-                        </div>
-                        
-                    </div>
-                </div>
-            </div>
-            
-
-  <div class="content" style="padding-top: 100; margin-left: 50;">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-md-8">
-                        <div class="card">
-                            <div class="header">
-                                <h4 class="title">Login</h4>
-                            </div>
-                            <div class="content">
-                                <form action="login.php" method="POST" id="loginForm" name="loginForm">
-                                    <div>
-                                        <?php echo $result;?>
-                                    </div>
+                            </div>  
+                            <div class="logo-add">
+                                <div class="container">
                                     <div class="row">
-                                       <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>Email</label>
-                                                <input type="email" class="form-control"   name="email"  required="">
-                                            </div> 
-                                       <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>Password</label>
-                                                <input type="password" class="form-control" placeholder="Password"  name="password" id="confirmpassword">
-                                            </div>
+                                        <div class="col-sm-4">
+                                            <div class="logo"><i class="fa fa-diamond"></i>ADMin  LOGin</div>
                                         </div>
-                                        <div class="col col-lg-8">
-                                        <button  type="submit" class="btn btn-blue btn-fill pull-right"  name="login">Login </button>
-                                        <a href="adminsignup.php" class="btn btn-blue btn-fill pull-left"  >Sign up</a>
+                                                
                                     </div>
-                                    </div>
-                                </form> 
+                                </div>
                             </div>
-                        </div> 
+                        </nav>  
                     </div>
                 </div>
+            </div>              
+            <div class="content">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div class="card">
+                                <div class="header">
+                                    <div class="row">
+                                        <div class="col-lg-5">
+                                         <?php echo $result;?>
+                                        </div> 
+                                    </div>
+                                </div>
+                                <div class="content">
+                                    <form action="login.php" method="POST" id="loginForm" name="loginForm">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>Email</label>
+                                                        <input type="email" class="form-control"   name="email"  required="">
+                                                </div>
+                                            </div> 
+                                            </div> 
+                                            <div class="row">   
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>Password</label>
+                                                            <input type="password" class="form-control" placeholder="Password"  name="password" id="confirmpassword">
+                                                </div>
+                                            </div> 
+                                            </div>   
+                                            <div class="row">
+                                                <div class="col col-lg-3">
+                                                    <button  type="submit" class="btn btn-info btn-fill pull-right btn-md"  name="login">Login </button>
+                                                </div>
+                                                <div class="col col-lg-3">
+                                                    <a href="adminsignup.php" type = "button" class="btn btn-info btn-fill pull-left btn-md"  >Sign up</a>
+                                                </div>    
+                                            </div>
+                                        </div>                                    
+                                    </form> 
+                                </div>
+                            </div> 
+                        </div>
+                    </div>
+                 </div>
             </div>
-        </div>
-        <?php include_once '../footer.php';?>
+            <div>
+              <?php include_once '../footer.php';?>  
+            </div>
+        
 </body>
 </html>
 
@@ -135,4 +148,5 @@
 
 
 
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+                                
+                                                    

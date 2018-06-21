@@ -1,91 +1,27 @@
 <?php
-function output_file($file, $title, $mime_type='')
-{
-if(!is_readable($file)) die('Error');
+      include_once 'includes/product.php';
+      include_once 'includes/transaction.php';
+      include_once 'includes/session.php';
+      // include_once 'verify.php';
+      $hash = $_GET['code'];
+      $product_id = $_GET['id'];
+      $dfile = Transaction::Where(array('hash'=>$hash, 'product_id'=>$product_id));
+      $product = Product::find($product_id);
+      //var_dump($dfile); 
+     //var_dump($product); exit();
+      $download_path = 'upload/document/'.$product->file;
+      $file_to_download = $download_path;
 
-$size = filesize($file);
-$title = rawurldecode($title);
-$known_mime_types=array(
-"pdf" => "application/pdf",
-"txt" => "text/plain",
-"html" => "text/html",
-"htm" => "text/html",
-"exe" => "application/octet-stream",
-"zip" => "application/zip",
-"doc" => "application/msword",
-"xls" => "application/vnd.ms-excel",
-"ppt" => "application/vnd.ms-powerpoint",
-"gif" => "image/gif",
-"png" => "image/png",
-"jpeg"=> "image/jpg",
-"jpg" => "image/jpg",
-"php" => "text/plain"
-);
-if($mime_type==''){
-$file_extension = strtolower(substr(strrchr($file,"."),1));
-if(array_key_exists($file_extension, $known_mime_types)){
-$mime_type=$known_mime_types[$file_extension];
-} else {
-$mime_type="application/force-download";
-};
-};
+     // file to be downloaded
+      header("Expires: 0");
+      header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
+      header("Cache-Control: no-store, no-cache, must-revalidate");
+      header("Cache-Control: post-check=0, pre-check=0", false);
+      header("Pragma: no-cache");  header("Content-type: application/file");
+      header('Content-length: '.filesize($file_to_download));
+      header('Content-disposition: attachment; filename='.basename($file_to_download));
+      readfile($file_to_download);
+      exit;
+      
 
-@ob_end_clean();
-
-
-if(ini_get('zlib.output_compression'))
-ini_set('zlib.output_compression', 'Off');
-header('Content-Type: ' . $mime_type);
-header('Content-Disposition: attachment; filename="'.$title.'"');
-header("Content-Transfer-Encoding: binary");
-header('Accept-Ranges: bytes');
-header("Cache-control: private");
-header('Pragma: private');
-header("Expires: THur, 26 Jul 2018 05:00:00 GMT");
-if(isset($_SERVER['HTTP_RANGE']))
-{
-list($a, $range) = explode("=",$_SERVER['HTTP_RANGE'],2);
-list($range) = explode(",",$range,2);
-list($range, $range_end) = explode("-", $range);
-$range=intval($range);
-if(!$range_end) {
-$range_end=$size-1;
-} else {
-$range_end=intval($range_end);
-}
-$new_length = $range_end-$range+1;
-header("HTTP/1.1 206 Partial Content");
-header("Content-Length: $new_length");
-header("Content-Range: bytes $range-$range_end/$size");
-} else {
-$new_length=$size;
-header("Content-Length: ".$size);
-}
-$chunksize = 1*(1024*1024);
-$bytes_send = 0;
-if ($file = fopen($file, 'r'))
-{
-if(isset($_SERVER['HTTP_RANGE']))
-fseek($file, $range);
-
-while(!feof($file) &&
-(!connection_aborted()) &&
-($bytes_send<$new_length)
-)
-{
-$buffer = fread($file, $chunksize);
-print($buffer);
-flush();
-$bytes_send += strlen($buffer);
-}
-fclose($file);
-} else
-
-die('Error - can not open file.');
-die();
-}
-set_time_limit(0);
-$file_path='upload/'.$_REQUEST['filename'];
-output_file($file_path, ''.$_REQUEST['filename'].'', 'text/plain');
-output_file($file_path, ''.$_REQUEST['size'].'', 'text/plain');
 ?>

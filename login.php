@@ -9,8 +9,8 @@
         $email = $_POST['email'];
         $password = $_POST['password'];
         $customer = Customer::authenticate($password, $email);      
-        $header = 'login Status';
-        $message2= "customer Loggin Failed.";
+        $header = 'status';
+        $message2= "Oops, you can't Login check your incorrect password or email.";
 
         if($customer){
         
@@ -62,31 +62,6 @@
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'>
     <link href="assets/css/pe-icon-7-stroke.css" rel="stylesheet" />
-
-
-<script type="text/javascript" src="js/JQUERY.js"></script>
-<script type="text/javascript" src="js/jquery.validate.js"></script>
-<script type="text/javascript">
-     function validatePassword() {
-        var validator = $("#loginForm").validate({
-            rules: {
-                password: "required",
-                confirmpassword: {
-                    equalTo: "#password"
-                }
-            },
-            messages: {
-                password: " Enter Password",
-                confirmpassword: " Enter Confirm Password Same as Password"
-            }
-        });
-        if (validator.form()) {
-            alert('Success');
-        }
-    }
- 
-</script>
-
 </head>
 
 <body>
@@ -131,8 +106,8 @@
                         </div>
                         <div class="col-sm-8">
                             <h3 class="add bb-year-end-ribbon hidden-xs"><img src="img/re.jpg" width="40px;" alt="" /> 
-                            <span>Please  <span>Login</span> </span> <button class="btn btn-default"> Get Stared </button></h3>
-                        </div>
+                            <span>Please  <span>Login</span> </span> 
+                         </div>
                     </div>
                 </div>
             </div>
@@ -160,7 +135,7 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-sm-4">
-                            <div class="logo"><i class="fa fa-diamond"></i> LOgin</div>
+                            <div class="logo"><i class="fa fa-diamond"></i> LOGin</div>
                         </div>
                         
                     </div>
@@ -168,36 +143,40 @@
             </div>
             
 
-  <div class="content" style="padding-top: 100; margin-left: 50;">
+  <div class="content">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-md-8">
                         <div class="card">
                             <div class="header">
-                                <h4 class="title">Login</h4>
+                                <div class="row">
+                                        <div class="col-lg-4 col-md-4 ">
+                                           <?php echo $result?> 
+                                        </div>
+                                </div>
                             </div>
                             <div class="content">
                                 <form action="login.php" method="POST" id="loginForm" name="loginForm">
-                                    <div>
-                                        <?php echo $result;?>
-                                    </div>
+                                    
                                     <div class="row">
                                        <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Email</label>
-                                                <input type="email" class="form-control"   name="email"  required="">
+                                                <input type="email" class="form-control"   name="email"  required="" placeholder="your Email@example.com">
                                             </div> 
+                                        </div>    
                                        <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Password</label>
-                                                <input type="password" class="form-control" placeholder="Password"  name="password" id="confirmpassword">
+                                                <input type="password" class="form-control" placeholder="Password"  name="password">
                                             </div>
                                         </div>
                                         <div class="col col-lg-8">
-                                        <button  type="submit" class="btn btn-blue btn-fill pull-right"  name="login">Login </button>
-                                        <a href="signup.php" class="btn btn-blue btn-fill pull-left"  >Signup</a>
+                                            <button  type="submit" class="btn btn-info btn-fill pull-right"  name="login" style="color: green">Login </button>
+                                            <a href="signup.php" class="btn btn-info btn-fill pull-left" style="color: green" >Signup</a>
+                                         </div>
                                     </div>
-                                    </div>
+                                
                                 </form> 
                             </div>
                         </div> 
@@ -205,6 +184,9 @@
                 </div>
             </div>
         </div>
-        <?php include_once'footer.php';?>
+        <footer>
+            <?php include_once'footer.php';?>
+        </footer>
+        
 </body>
 </html>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     

@@ -40,7 +40,7 @@
 		if($lastproduct = static::last()){
       $lastId = explode ('/',$lastproduct->product_id);
       $lastId[1]++;
-    $this->product_id = 'PROD/0'.$lastId[1];
+    $this->product_id = 'PROD/'.$lastId[1];
     }else{
       $this->product_id = 'PROD/01'; 
     }
@@ -54,11 +54,11 @@
  		return ($this->create())? true : false;
  	}
 
-  public function displayproduct(){
-        $sql = "SELECT * FROM ".static::$table_name." WHERE $cart_id = 'cart_id' ";
+  /*public function displayproduct(){
+        $sql = "SELECT * FROM ".static::$table_name." WHERE $product_id = 'product_id' ";
       $product = static::findBySql($sql);
       return ($product) ? array_shift($product) : false;
-  }
+  }*/
 
     protected $upload_errors = array (
       UPLOAD_ERR_OK         => "No errors.",
@@ -84,13 +84,23 @@
       }else{
         if (!isset($this->product_id) AND !isset($this->file)) 
           $this->setNewProductId();
+        //$ext = pathinfo($file['name'],PATHINFO_EXTENSION);
         $this->temp_path = $file['tmp_name'];
-        $this->logo = str_replace("/", "_", $this->product_id).".".basename($file["type"]);
-        $this->file = str_replace("/", "_", $file['name']).".".basename($file["type"]);
+        $this->logo = str_replace("/", "_", $this->product_id).".".basename($file['type']);
+        $this->file = str_replace("/", "_", $file['name']);
         $this->type = $file['type'];
         $this->size = $file['size'];
         return true;
-      }
+
+
+
+/*$path_parts = pathinfo('/www/htdocs/inc/lib.inc.php');
+
+echo $path_parts['dirname'], "\n";
+echo $path_parts['basename'], "\n";
+echo $path_parts['extension'], "\n";
+echo $path_parts['filename'], "\n"*/
+     }
     }
 
     public function save_with_file(){
@@ -148,7 +158,7 @@
                             </div>
                           </div>
                           <h4>Name:{$product->title}</h4>
-                          <h5> Price: N{$product->price}</h5>
+                          <h5> Price: N$product->price /100</h5>
                           <h5>Description:  $product->descr</h6>
                           <h6>size  $product->size MB</h6>
                           <div><a href= 'login.php' class='btn btn-default' role='button'>Add to Cart</a><span class='pull-right'><i class='fa fa-heart-o'
@@ -204,7 +214,7 @@ public static function display(){
                         </div>
                       </div>
                       <h3>$product->descr</h3>
-                      <strong>N.$product->price</strong>
+                      <strong>N.$product->price /100</strong>
 
                    <div>
                         <a href='#' class='btn btn-default' role='button'>Add to Cart</a><span class='pull-right'><i class='fa fa-heart-o'></i> Add to Wishlist</span></div>
@@ -347,25 +357,26 @@ $show.="
       
 if($all =static::All())
 foreach ($all as $index=>$product){
-  if ($index != 0 && $index % 3==0)
+  $product->price/= 100;
+  if ($index != 0 && $index % 4==0)
     $panel.="</div>
   <div class ='row'>";
 
-  $panel.= "<div class='col-lg-4  col-md-6'>
+  $panel.= "<div class='col-lg-2  col-md-2'>
               <div class='panel panel-default '> 
                 <div>
-                 <img src='images/product/$product->logo' style='max-width: 100px; max-height: 98px;'/>
+                 <img src='images/product/$product->logo' style='max-width: 80px; max-height: 80px;'/>
                  </div>
                 <div class='panel-body'>
                   <strong> $product->title</strong>
                   <h4> $product->publisher</h4>
-                  <h4> N$product->price</h4>
+                  <h4> N$product->price </h4>
                   <h4>size:$product->size</h4>
                 </div>
                 <div class='panel-footer'>
                   <h4><a class='btn btn-success' title='Click to view!' href='user_product_details.php?id=$product->product_id'><i class='fa icon-check'></i> VIEW </a>
 
-                <h4> <a href='./download.php?filename=$product->file'><?php echo $product->file;?>download</a>
+                
                 </div>  
               </div>
             </div>";}

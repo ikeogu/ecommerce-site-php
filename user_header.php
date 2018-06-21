@@ -1,7 +1,7 @@
 <?php 
 include_once('includes/session.php');
 include_once('includes/orderdetails.php');
-
+if(!($session->is_logged_in())) redirect('login.php');
 ?>
 
 
@@ -31,6 +31,7 @@ include_once('includes/orderdetails.php');
 						</div>
 						<div>
 								<?php 
+
 									$count = count(Orderdetails::where(array('customer_id' => $session->user_id )));
 		
 								echo "<div class='pull-right'> <br/>
@@ -69,7 +70,7 @@ include_once('includes/orderdetails.php');
 										</li>
 										<li class=""><a href="user_products.php"><i class="icon-flag"></i>products</a></li>
 										<li class=""><a href="product_summary.php"><i class="icon-flag"></i> Chart</a></li>
-										<li class=""><a href="aboutus.php"><i class="icon-flag"></i> About Us</a></li>
+										<li class=""><a href="logout.php"><i class="icon-flag"></i> Logout</a></li>
 									<li><a href="contact.php">Contact Us</a></li>
 									</ul>
 									<form class="navbar-form navbar-right" role="search">
@@ -81,10 +82,8 @@ include_once('includes/orderdetails.php');
 								</div>
 							</div>
 						</nav>
-					
-
 					</div>	
-				</div>	
+				</div>	  
 			</div>	
 
 		</header>

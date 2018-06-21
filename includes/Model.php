@@ -27,7 +27,7 @@
 		}
 
 		public static function all(){
-			$sql = "SELECT * from ".static::$table_name;
+			$sql = "SELECT * FROM ".static::$table_name;
 			return static::findBySql($sql);			
 		}
 

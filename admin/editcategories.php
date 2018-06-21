@@ -14,9 +14,9 @@ if(isset($_GET) & !empty($_GET)){
 
       
             if(isset($_POST['update'])){
+              
             $categories = Categories::instantiate($_POST);
-            $categories->getcategoriesId();
-            $header = 'update Status';
+           $header = 'update Status';
             $message ='categories updated successsfully.';
             $message2= 'categories was not updated.';
             $message3 = 'there is no selected category, select category.';
@@ -48,11 +48,14 @@ if(isset($_GET) & !empty($_GET)){
                           <div class="header">
                               <h4 class="title">Edit Category</h4>
                           </div>
-                          <div class="content">
-                              <form action="categories.php" method="POST">
-                                  <div>
+                          <div class="row">
+                            <div class="col col-lg-4">
                                      <?php echo $result?>
-                                  </div>
+                            </div>
+                                  
+                          </div>
+                          <div class="content">
+                              <form action="editcategories.php?id=<?php echo $categories->getcategoriesId()?>" method="POST">
                                   
                                      <div class="col-md-3">
                                           <div class="form-group">

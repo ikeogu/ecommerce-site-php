@@ -14,7 +14,7 @@ class Orderdetails extends Model
 	public $error =  array( );
 
 
-	protected static $table_name = 'order_details';
+	protected static $table_name = 'orderdetails';
 	protected static $primary_key = 'orderdetails_id';
 	protected  static $class_name = 'Orderdetails';
 	protected  static $table_fields = array('orderdetails_id', 'product_id', 'customer_id','quantity','Total');

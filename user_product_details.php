@@ -1,14 +1,12 @@
 <?php 
-  include('includes/connect.php');
   include('includes/session.php');
-  include('formatMoney.php');
-  include_once 'includes/connect.php';
   include_once 'includes/product.php';
   include_once ('user_header.php');
 
   if(isset($_GET) & !empty($_GET)){
     $product_id = $_GET['id'];
     $product = Product::find($product_id);
+    $_SESSION['product_id'] = $product->getProductId();
   }else{
     header('location: user_products.php');
   }
@@ -34,7 +32,7 @@
           class="input-xlarge" required style="color: green;"/>
           <div class="control-group">
             <label>
-              <h3 style="color: green;"><span>Price: N<?php echo formatMoney($product->price,2);?></span></h3>
+              <h3 style="color: green;"><span>Price: N<?php echo $product->price;?></span></h3>
             </label>
           </div>  
           <br/>

@@ -1,9 +1,9 @@
 <?php
 include ("header2.php");
 include_once '../includes/category.php';
-include_once 'includes/session.php';
+//include_once 'includes/session.php';
 include_once 'includes/function.php';
-if(!($session->is_logged_in())) redirect('login.php');
+//if(!($session->is_logged_in())) redirect('login.php');
      $result = '';
    
      if(isset($_POST['create'])){

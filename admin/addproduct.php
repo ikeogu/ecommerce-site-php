@@ -4,8 +4,10 @@
     $result = '';
   
     if(isset($_POST['create'])){
+       
         
       $product = Product::instantiate($_POST);
+      $product->price *=100;
       $header = ' Upload Status ';
       $message ='Your product  was successfully uploaded.';
       $message2= 'Oops! seems somthing was missing .';
@@ -105,7 +107,7 @@
                                             </div>
                                             <div class="col-lg-4 col-md-4">
                                                 <div class="form-group">
-                                                <button type="submit" class="btn btn-success btn-fill pull-right" name="create" >Up Load</button>
+                                                <button type="submit" class="btn btn-info btn-fill pull-right" name="create" >Up Load</button>
                                             </div>
                                             </div>
                                     </div>
@@ -154,24 +156,4 @@
 
 
 </body>
-
-    <!--   Core JS Files   -->
-    <script src="assets/js/jquery.3.2.1.min.js" type="text/javascript"></script>
-	<script src="assets/js/bootstrap.min.js" type="text/javascript"></script>
-
-	<!--  Charts Plugin -->
-	<script src="assets/js/chartist.min.js"></script>
-
-    <!--  Notifications Plugin    -->
-    <script src="assets/js/bootstrap-notify.js"></script>
-
-    <!--  Google Maps Plugin    -->
-    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
-
-    <!-- Light Bootstrap Table Core javascript and methods for Demo purpose -->
-	<script src="assets/js/light-bootstrap-dashboard.js?v=1.4.0"></script>
-
-	<!-- Light Bootstrap Table DEMO methods, don't include it in your project! -->
-	<script src="assets/js/demo.js"></script>
-
 </html>

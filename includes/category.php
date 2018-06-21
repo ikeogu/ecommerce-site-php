@@ -34,9 +34,9 @@
 		if($lastcategory = static::last()){
       $lastId = explode ('/',$lastcategory->cat_id);
       $lastId[1]++;
-    $this->cat_id = 'CAT/00'.$lastId[1];
+    $this->cat_id = 'CAT/0'.$lastId[1];
     }else{
-     return $this->cat_id = 'CAT/001'; 
+     return $this->cat_id = 'CAT/01'; 
     }
   }
     

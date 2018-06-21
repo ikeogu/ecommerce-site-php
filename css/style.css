@@ -276,7 +276,7 @@ a.register{
 }
 
 .header-bottom .form-control:focus {
-	color: #fff;
+	color:blue;
 	border-color: transparent;
 	box-shadow: none;
 	outline: none;

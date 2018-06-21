@@ -2,6 +2,7 @@
 include_once 'includes/admin.php';
 include_once 'includes/session.php';
 include_once 'includes/function.php';
+include("header2.php");
 if(!($session->is_logged_in())) redirect('login.php');
   $result = '';
     $admin = Admin::find($session->user_id);
@@ -24,9 +25,24 @@ if(!($session->is_logged_in())) redirect('login.php');
                     }
     }
 ?>
-<?php
-include("header2.php");
-?>
+
+<script type="text/javascript">
+        $(document).ready(function(){
+
+            demo.initChartist();
+
+            $.notify({
+                icon: 'pe-7s-gift',
+                message: "ADMIN YOUR ARE WELCOME!"
+
+            },{
+                type: 'info',
+                timer: 4000
+            });
+
+        });
+</script>
+
         <div class="content">
             <div class="container-fluid">
                 <div class="row">
@@ -129,7 +145,7 @@ include("header2.php");
                                      <a href="#">
                                     <img class="avatar border-gray" src="assets/img/admin/<?php echo $admin->passport;?>" alt="..."/>
 
-                                      <h4 class="title"  style="color: green" value="<?php $admin->first_value AND  $admin->last_value;?>"><br />
+                                      <h4 class="title"  style="color: green" value="<?php $admin->fname AND  $admin->lname;?>"><br />
                                          <small value="<?php $admin->email;?>" style="color: green"></small>
                                       </h4>
                                     </a>
